@@ -16,6 +16,11 @@ services:
       TODO_DB_NAME: todo
       TODO_REDIS_HOST: todo-redis
       TODO_REDIS_PORT: 6379
+      CRYSTAL_DEFAULT: 0
+      CRYSTAL_FREE_DEFAULT: 50
+      FRIEND_COIN_DEFAULT: 10
+      TUTORIAL_START: 0
+      ERROR_DB_UPDATE: "データべ－スの更新に失敗した"
     volumes:
       - .:/app
     ports:

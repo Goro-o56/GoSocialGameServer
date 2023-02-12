@@ -3,15 +3,20 @@ package config
 import "github.com/caarlos0/env/v6"
 
 type Config struct {
-	Env        string `env:"TODO_ENV" envDefault:"dev"`
-	Port       int    `env:"PORT" envDefault:"80"`
-	DBHost     string `env:"TODO_DB_HOST" envDefault:"127.0.0.1"`
-	DBPort     int    `env:"TODO_DB_PORT" envDefault:"33306"`
-	DBUser     string `env:"TODO_DB_USER" envDefault:"todo"`
-	DBPassword string `env:"TODO_DB_PASSWORD" envDefault:"todo"`
-	DBName     string `env:"TODO_DB_NAME" envDefault:"todo"`
-	RedisHost  string `env:"TODO_REDIS_HOST" envDefault: "127.0.0.1"`
-	RedisPort  int    `env:"TODO_REDIS_PORT" envDefault:"36379"`
+	Env                string `env:"TODO_ENV" envDefault:"dev"`
+	Port               int    `env:"PORT" envDefault:"80"`
+	DBHost             string `env:"TODO_DB_HOST" envDefault:"127.0.0.1"`
+	DBPort             int    `env:"TODO_DB_PORT" envDefault:"33306"`
+	DBUser             string `env:"TODO_DB_USER" envDefault:"todo"`
+	DBPassword         string `env:"TODO_DB_PASSWORD" envDefault:"todo"`
+	DBName             string `env:"TODO_DB_NAME" envDefault:"todo"`
+	RedisHost          string `env:"TODO_REDIS_HOST" envDefault:"127.0.0.1"`
+	RedisPort          int    `env:"TODO_REDIS_PORT" envDefault:"36379"`
+	CrystalDefault     int    `env:"CRYSTAL_DEFAULT" envDefault:"0"`
+	CrystalFreeDefault int    `env:"CRYSTAL_FREE_DEFAULT" envDefault:"50"`
+	FriendCoinDefault  int    `env:"FRIEND_COIN_DEFAULT" envDefault:"10"`
+	TutorialStart      int    `env:"TUTORIAL_START" envDefault:"0"`
+	ErrorDbUpdate      string `env:"ERROR_DB_UPDATE" envDefault:"データベースの更新に失敗した"`
 }
 
 func New() (*Config, error) {

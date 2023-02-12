@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"Go-Handson/config"
 	"Go-Handson/entity"
+	"Go-Handson/service"
 	"context"
 )
 
@@ -19,4 +21,9 @@ type RegisterUserService interface {
 }
 type LoginService interface {
 	Login(ctx context.Context, name, pw string) (string, error)
+}
+
+type RegistrationService interface {
+	GenerateUserID() (string, error)
+	CreateUserProfile(userID string, cfg *config.Config) (service.UserProfile, error)
 }

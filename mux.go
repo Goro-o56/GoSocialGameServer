@@ -80,5 +80,6 @@ func NewMux(ctx context.Context, cfg *config.Config) (http.Handler, func(), erro
 			_, _ = w.Write([]byte(`{"message": "admin only"}`))
 		})
 	})
+	mux.Get("/registration", handler.Registration)
 	return mux, cleanup, nil
 }
