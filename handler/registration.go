@@ -7,12 +7,12 @@ import (
 	"net/http"
 )
 
-type RegistrationResponse struct {
-	UserProfile *service.UserProfile
+type Registration struct {
+	Service RegistrationService
 }
 
-func Registration(w http.ResponseWriter, r *http.Request) {
-	userID, err := service.GenerateUserID()
+func (rg *Registration) Registration(w http.ResponseWriter, r *http.Request) {
+	userID, err := rg.Service.GenerateUserID()
 	if err != nil {
 
 		w.WriteHeader(http.StatusInternalServerError)
@@ -26,7 +26,7 @@ func Registration(w http.ResponseWriter, r *http.Request) {
 		//config error
 
 	}
-	userProfile, err := service.CreateUserProfile(userID, cfg)
+	userProfile, err := rg.Service.CreateUserProfile(userID, cfg)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -34,8 +34,12 @@ func Registration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// クライアントへのレスポンス
+	type RegistrationResponse struct {
+		UserProfile *service.UserProfile
+	}
+
 	response := &RegistrationResponse{
-		UserProfile: userProfile,
+		UserProfile: &userProfile,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

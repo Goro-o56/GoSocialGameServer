@@ -14,13 +14,16 @@ type UserProfile struct {
 	TutorialProgress int    `json:"tutorial_progress"`
 }
 
-func GenerateUserID() (string, error) {
+type Registration struct {
+}
+
+func (r *Registration) GenerateUserID() (string, error) {
 	// ユーザーIDの決定
 	userID := uuid.New().String() // 例: 4b3403665fea6
 	return userID, nil
 }
 
-func CreateUserProfile(userID string, cfg *config.Config) (*UserProfile, error) {
+func (r *Registration) CreateUserProfile(userID string, cfg *config.Config) (*UserProfile, error) {
 	// 初期データの設定
 	userProfile := &UserProfile{
 		UserID:           userID,

@@ -24,14 +24,14 @@ CREATE TABLE `task`
             ON DELETE RESTRICT ON UPDATE RESTRICT
 ) Engine=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='タスク';
 
-CREATE TABLE user_profile (
-                              user_id VARCHAR(37) CHARACTER SET utf8 NOT NULL,
-                              user_name VARCHAR(32) CHARACTER SET utf8 NOT NULL,
-                              crystal INT UNSIGNED NOT NULL DEFAULT 0,
-                              crystal_free INT UNSIGNED NOT NULL DEFAULT 0,
-                              friend_coin INT UNSIGNED NOT NULL DEFAULT 0,
-                              tutorial_progress SMALLINT UNSIGNED NOT NULL DEFAULT 0,
-                              created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                              updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                              PRIMARY KEY (user_id)
+CREATE TABLE `user_profile` (
+                              `user_id` VARCHAR(37) CHARACTER SET utf8 NOT NULL,
+                              `user_name` VARCHAR(32) CHARACTER SET utf8 NOT NULL,
+                              `crystal` INT UNSIGNED NOT NULL DEFAULT 0,
+                              `crystal_free` INT UNSIGNED NOT NULL DEFAULT 0,
+                              `friend_coin` INT UNSIGNED NOT NULL DEFAULT 0,
+                              `tutorial_progress` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+                              `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                              `updated_at`TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                              PRIMARY KEY (`user_id`)
 );
