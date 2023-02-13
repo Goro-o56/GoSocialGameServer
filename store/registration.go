@@ -2,23 +2,24 @@ package store
 
 import (
 	"Go-Handson/config"
+	"Go-Handson/entity"
 	"database/sql"
 	"errors"
+	"fmt"
 	"log"
 )
 
-type UserProfile struct {
-	UserID           string `json:"user_id"`
-	UserName         string `json:"user_name"`
-	Crystal          int    `json:"crystal"`
-	CrystalFree      int    `json:"crystal_free"`
-	FriendCoin       int    `json:"friend_coin"`
-	TutorialProgress int    `json:"tutorial_progress"`
-}
-
-func SaveUserProfile(userProfile *UserProfile, cfg *config.Config) error {
+func (r *Repository) SaveUserProfile(userProfile entity.UserProfile) error {
 	// データの書き込み
-	db, err := sql.Open("mysql", cfg.DBUser+":"+cfg.DBPassword+"@/"+cfg.DBName)
+	cfg, _ := config.New()
+	db, err := sql.Open("mysql",
+		fmt.Sprintf(
+			"%s:%s@tcp(%s:%d)/%s?parseTime=true",
+			cfg.DBUser, cfg.DBPassword,
+			cfg.DBHost, cfg.DBPort,
+			cfg.DBName,
+		),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,6 +29,7 @@ func SaveUserProfile(userProfile *UserProfile, cfg *config.Config) error {
 		userProfile.UserID, userProfile.UserName, userProfile.Crystal, userProfile.CrystalFree, userProfile.FriendCoin, userProfile.TutorialProgress)
 	if err != nil {
 		log.Println(err)
+		log.Println("args:", userProfile.UserID, userProfile.UserName, userProfile.Crystal, userProfile.CrystalFree, userProfile.FriendCoin, userProfile.TutorialProgress)
 		return errors.New(cfg.ErrorDbUpdate)
 	}
 	return nil

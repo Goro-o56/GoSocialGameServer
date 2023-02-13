@@ -1,8 +1,7 @@
 package handler
 
 import (
-	"Go-Handson/config"
-	"Go-Handson/service"
+	"Go-Handson/entity"
 	"encoding/json"
 	"net/http"
 )
@@ -21,12 +20,8 @@ func (rg *Registration) Registration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 初期データの設定
-	cfg, err := config.New()
-	if err != nil {
-		//config error
 
-	}
-	userProfile, err := rg.Service.CreateUserProfile(userID, cfg)
+	userProfile, err := rg.Service.CreateUserProfile(userID)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -35,11 +30,11 @@ func (rg *Registration) Registration(w http.ResponseWriter, r *http.Request) {
 
 	// クライアントへのレスポンス
 	type RegistrationResponse struct {
-		UserProfile *service.UserProfile
+		UserProfile *entity.UserProfile
 	}
 
-	response := &RegistrationResponse{
-		UserProfile: &userProfile,
+	response := RegistrationResponse{
+		UserProfile: userProfile,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

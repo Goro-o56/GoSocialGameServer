@@ -2,19 +2,12 @@ package service
 
 import (
 	"Go-Handson/config"
+	"Go-Handson/entity"
 	"github.com/google/uuid"
 )
 
-type UserProfile struct {
-	UserID           string `json:"user_id"`
-	UserName         string `json:"user_name"`
-	Crystal          int    `json:"crystal"`
-	CrystalFree      int    `json:"crystal_free"`
-	FriendCoin       int    `json:"friend_coin"`
-	TutorialProgress int    `json:"tutorial_progress"`
-}
-
 type Registration struct {
+	Repo Registrationer
 }
 
 func (r *Registration) GenerateUserID() (string, error) {
@@ -23,9 +16,10 @@ func (r *Registration) GenerateUserID() (string, error) {
 	return userID, nil
 }
 
-func (r *Registration) CreateUserProfile(userID string, cfg *config.Config) (*UserProfile, error) {
+func (r *Registration) CreateUserProfile(userID string) (*entity.UserProfile, error) {
 	// 初期データの設定
-	userProfile := &UserProfile{
+	cfg, _ := config.New()
+	userProfile := entity.UserProfile{
 		UserID:           userID,
 		UserName:         "user name",
 		Crystal:          cfg.CrystalDefault,
@@ -33,5 +27,10 @@ func (r *Registration) CreateUserProfile(userID string, cfg *config.Config) (*Us
 		FriendCoin:       cfg.FriendCoinDefault,
 		TutorialProgress: cfg.TutorialStart,
 	}
-	return userProfile, nil
+
+	err := r.Repo.SaveUserProfile(userProfile)
+	if err != nil {
+
+	}
+	return &userProfile, err
 }

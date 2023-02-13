@@ -34,4 +34,4 @@ CREATE TABLE `user_profile` (
                               `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                               `updated_at`TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                               PRIMARY KEY (`user_id`)
-);
+) Engine=InnoDB DEFAULT CHARSET=utf8mb4;

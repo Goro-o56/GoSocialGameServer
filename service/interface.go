@@ -24,3 +24,7 @@ type UserGetter interface {
 type TokenGenerator interface {
 	GenerateToken(ctx context.Context, u entity.User) ([]byte, error)
 }
+
+type Registrationer interface {
+	SaveUserProfile(userProfile entity.UserProfile) error
+}
